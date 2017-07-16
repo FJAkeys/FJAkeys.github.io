@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="metaprogramming,lisp,tutorial," />
 
 
 
@@ -93,15 +93,19 @@
 
 
 
-<meta name="description" content="May the flames guide thee.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Keys&#39; Sapce">
-<meta property="og:url" content="http://fjakeys.github.io/index.html">
+<meta name="description" content="Meta？ 以前玩过一款还算不错的游戏叫做EVE，其中游戏角色在学习技能时，最划算最实用的做法就是初期优先学习学习技能。对，我没有打错，学习学习技能，或者说是提升学习能力，这样你的角色在后期就能够更快的学习其他技能，早早的成为舰长，驾驶战列舰甚至航母傲游太空。  现实生活中我们把这种用来学习的学习技能称为元学习，比如你学习思维导图，学习如何快速记忆，学习更加巧妙的思维方式。这时，如果你认识到了自己">
+<meta name="keywords" content="metaprogramming,lisp,tutorial">
+<meta property="og:type" content="article">
+<meta property="og:title" content="From Meta to Lisp">
+<meta property="og:url" content="http://fjakeys.github.io/2017/07/16/From+meta+to+lisp/index.html">
 <meta property="og:site_name" content="Keys&#39; Sapce">
-<meta property="og:description" content="May the flames guide thee.">
+<meta property="og:description" content="Meta？ 以前玩过一款还算不错的游戏叫做EVE，其中游戏角色在学习技能时，最划算最实用的做法就是初期优先学习学习技能。对，我没有打错，学习学习技能，或者说是提升学习能力，这样你的角色在后期就能够更快的学习其他技能，早早的成为舰长，驾驶战列舰甚至航母傲游太空。  现实生活中我们把这种用来学习的学习技能称为元学习，比如你学习思维导图，学习如何快速记忆，学习更加巧妙的思维方式。这时，如果你认识到了自己">
+<meta property="og:image" content="http://fjakeys.github.io/images/cellstr.png">
+<meta property="og:updated_time" content="2017-07-16T13:36:01.625Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Keys&#39; Sapce">
-<meta name="twitter:description" content="May the flames guide thee.">
+<meta name="twitter:title" content="From Meta to Lisp">
+<meta name="twitter:description" content="Meta？ 以前玩过一款还算不错的游戏叫做EVE，其中游戏角色在学习技能时，最划算最实用的做法就是初期优先学习学习技能。对，我没有打错，学习学习技能，或者说是提升学习能力，这样你的角色在后期就能够更快的学习其他技能，早早的成为舰长，驾驶战列舰甚至航母傲游太空。  现实生活中我们把这种用来学习的学习技能称为元学习，比如你学习思维导图，学习如何快速记忆，学习更加巧妙的思维方式。这时，如果你认识到了自己">
+<meta name="twitter:image" content="http://fjakeys.github.io/images/cellstr.png">
 
 
 
@@ -129,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://fjakeys.github.io/"/>
+  <link rel="canonical" href="http://fjakeys.github.io/2017/07/16/From+meta+to+lisp/"/>
 
 
 
 
 
-  <title>Keys' Sapce</title>
+  <title>From Meta to Lisp | Keys' Sapce</title>
   
 
 
@@ -160,9 +164,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -245,9 +247,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -273,9 +275,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/16/From+meta+to+lisp/" itemprop="url">From Meta to Lisp</a></h1>
+          <h1 class="post-title" itemprop="name headline">From Meta to Lisp</h1>
         
 
         <div class="post-meta">
@@ -322,9 +322,7 @@
       
 
       
-        
-          
-            <h1 id="Meta？"><a href="#Meta？" class="headerlink" title="Meta？"></a>Meta？</h1><p> 以前玩过一款还算不错的游戏叫做EVE，其中游戏角色在学习技能时，最划算最实用的做法就是初期优先学习学习技能。对，我没有打错，学习学习技能，或者说是提升学习能力，这样你的角色在后期就能够更快的学习其他技能，早早的成为舰长，驾驶战列舰甚至航母傲游太空。</p>
+        <h1 id="Meta？"><a href="#Meta？" class="headerlink" title="Meta？"></a>Meta？</h1><p> 以前玩过一款还算不错的游戏叫做EVE，其中游戏角色在学习技能时，最划算最实用的做法就是初期优先学习学习技能。对，我没有打错，学习学习技能，或者说是提升学习能力，这样你的角色在后期就能够更快的学习其他技能，早早的成为舰长，驾驶战列舰甚至航母傲游太空。</p>
 <p> 现实生活中我们把这种用来学习的学习技能称为元学习，比如你学习思维导图，学习如何快速记忆，学习更加巧妙的思维方式。这时，如果你认识到了自己的思维方式和过程，那么这就是一种元认知了。简单的说，元认知就是对认知的认知，对思考本身的思考。今天你在工作上遇到了令人气愤的事，然而你意识到了自己正在生气也从思维过程中发现了自己为什么会生气，及时的调整情绪状态，冷静友善地处理了这一事件，这就是以元认知为基础的情绪管理。</p>
 <p> 从儒家的“自省”到佛家的“本根正念”，再到哲学体系中的两大板块——认知论与逻辑学，都是元认知的表现。<br> 元认知的“元”，是来自希腊语中表示“在···之间、在···之后、超过···”的前缀词meta，具有超越、高阶的意思。meta+一个词，多半表示了对这个词的代表物拥有一种类似于自身描述自身的关系。描述数据结构的数据，我们就称其为Metadata，Metadata也是数据，同时也在描述数据。再如Metafiction元小说，就是小说中的人物认识到了自己是虚构的，存在于虚构的故事当中，这本小说描述的就是有这么一本小说，并且其中发生的故事。这里我再抱歉地自创一个词：“元梦(Metadream)”，因为我经常梦到自己睡着了在做梦。</p>
 <p> 所以元编程(Metaprogramming)是什么呢？用程序来编写程序，用代码生成代码！听起来好像很厉害，但仔细想想，这到底有什么用？</p>
@@ -380,42 +378,60 @@
 <li><a href="http://www.jetbrains.com/mps/docs/Language_Oriented_Programming.pdf" target="_blank" rel="external">Language Oriented Programming - The Next Programming Paradigm</a></li>
 </ol>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <div>
+      
+        
+
       
     </div>
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/metaprogramming/" rel="tag"># metaprogramming</a>
+          
+            <a href="/tags/lisp/" rel="tag"># lisp</a>
+          
+            <a href="/tags/tutorial/" rel="tag"># tutorial</a>
+          
+        </div>
+      
+
+      
+      
+      
 
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -423,6 +439,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -443,8 +463,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -497,6 +526,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Meta？"><span class="nav-number">1.</span> <span class="nav-text">Meta？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Metaprogramming-amp-LOP"><span class="nav-number">2.</span> <span class="nav-text">Metaprogramming & LOP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lisp-at-First-Glimpse"><span class="nav-number">3.</span> <span class="nav-text">Lisp at First Glimpse</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lisp怎么来的"><span class="nav-number">3.1.</span> <span class="nav-text">Lisp怎么来的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S表达式"><span class="nav-number">3.2.</span> <span class="nav-text">S表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#宏"><span class="nav-number">3.3.</span> <span class="nav-text">宏</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么Lisp不流行"><span class="nav-number">4.</span> <span class="nav-text">为什么Lisp不流行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -610,10 +655,10 @@
   
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
-  
+
 
   
 
@@ -662,26 +707,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
