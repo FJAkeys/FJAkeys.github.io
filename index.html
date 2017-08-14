@@ -256,6 +256,239 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://fjakeys.github.io/2017/08/14/settings_of_emacs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Keys Yan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Keys' Sapce">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/14/settings_of_emacs/" itemprop="url">From Meta to Lisp</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-14T16:01:30+08:00">
+                2017-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="让工作更方便的Emacs配置"><a href="#让工作更方便的Emacs配置" class="headerlink" title="让工作更方便的Emacs配置"></a>让工作更方便的Emacs配置</h1><blockquote>
+<p>上一节中我们提到了使用Emacs作为CL的IDE，这一节就是对Emacs的一些具体配置，Emacs版本为24，内容包括：</p>
+<ol>
+<li>拓展包安装与管理</li>
+<li>配色和高亮</li>
+<li>补全和相关增强</li>
+<li>模板展开</li>
+<li>标签窗口<blockquote>
+<ul>
+<li>关于文中的按键：<strong>C是Ctrl</strong>，<strong>M是Meta</strong>，不过我们一般的键盘都用Alt来代替，按键C-x C-f就是说先按下Ctrl+x，再按下Ctrl+f。<strong>[RET]表示回车</strong>。</li>
+<li>关于代码块的第一行：它是用来告诉你这些代码是写在哪个文件下边的，粘贴复制的时候请自行忽略。</li>
+<li>看完文章后觉得自己一步一步配置太麻烦的话可以在git上fork我的<strong>配置文件</strong>，地址在<a href="https://github.com/FJAkeys/.emacs/" target="_blank" rel="external">这里</a>，其中还包括了一些关于elpy(eamcs python编辑模式)的设置。</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<p>首先确定你emacs的配置文件在哪里。作为linux系统，通常情况下你会在home文件夹下面发现一个叫做.emacs.d文件夹，其中就包含了emacs启动的<strong>初始化配置文件init.el</strong>。.el格式说明它是一个emacs lisp文件，和一般配置文件不同，.el不单单储存文本格式或者像XML、Json一类的配置信息，你写在文件中的emacs lisp代码可以在编辑器加载中被执行。不过换句话来说，这也很好的印证了lisp代码就是数据的理念。init.el及其引用的各个文件允许你对你的编辑器进行任何你想象得到的改动，所以也出现过“什么？你觉得Vim更好用的话用Emacs写一个Vim就好了”这种说法(有现成的Vim-mode插件包了，适合用惯了Vim的人，同时也没有失去Emacs强大的定制能力。Vim这个东西还没有灭绝只能说明Vimer和emacser一样有信仰，每每至于此，心生敬佩)。</p>
+<p>现在我们打开emacs，按下C-x C-f在最底层缓冲区找到.emacs.d文件夹，打开init.el文件。如果你的系统里没有这个文件和文件夹，你可以自行创建。我们在这个文件中写下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">;;write in your .emacs.d/init.el</div><div class="line">;;----------------------------------------</div><div class="line">;;basic customization</div><div class="line">(setq inhibit-startup-message t)</div><div class="line">(global-linum-mode t)</div></pre></td></tr></table></figure>
+<p>第一行的代码告诉emacs打开编辑器时不用显示初始的欢迎和声明，第二行打开全局行号模式，方便对代码行的追踪。重启emacs编辑器就能看到改变。</p>
+<h2 id="拓展包安装与管理"><a href="#拓展包安装与管理" class="headerlink" title="拓展包安装与管理"></a>拓展包安装与管理</h2><p>ELPA(Emacs Lisp Package Archive)，顾名思义就是用来安装和管理emacs拓展包的。把下面的代码写在初始化文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">;;write in your .emacs.d/init.el</div><div class="line">;;----------------------------------------</div><div class="line">;;package archive</div><div class="line">(require &apos;package)</div><div class="line"></div><div class="line">(setq package-archives &apos;((&quot;gnu&quot; . &quot;https://elpa.gnu.org/packages/&quot;)</div><div class="line">                         (&quot;marmalade&quot; . &quot;https://marmalade-repo.org/packages/&quot;)</div><div class="line">                         (&quot;melpa&quot; . &quot;https://melpa.org/packages/&quot;)))</div><div class="line"></div><div class="line">(add-to-list &apos;package-archives &apos;(&quot;org&quot; . &quot;http://orgmode.org/elpa/&quot;) t);;if you have org-mode</div></pre></td></tr></table></figure>
+<p>最后多出来的一行代码是为了org-mode用户准备的，你也可以写上去，文章最后我们会简要介绍它。如果你是<strong>中国国内用户</strong>，推荐你使用popkit elpa，它是elpa的一个国内镜像，属于私人项目，你可以在其<a href="">主页</a>上扫码进行捐赠来支持该作者。</p>
+<p>下面是加入popkit源的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">;;write in your .emacs.d/init.el</div><div class="line">;;----------------------------------------</div><div class="line">;;package archive</div><div class="line">(add-to-list &apos;package-archives</div><div class="line">          &apos;(&quot;popkit&quot; . &quot;http://elpa.popkit.org/packages/&quot;) t)</div></pre></td></tr></table></figure>
+<p>最后还需要加上一条：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">;;write in your .emacs.d/init.el</div><div class="line">;;----------------------------------------</div><div class="line">;;package archive</div><div class="line">(package-initialize)</div></pre></td></tr></table></figure>
+<p>它用来初始化，ELPA可以把安装后的package路径自动加入到load-path中，也就是说，之后直接require你的包就行，不用再写(add-to-list ‘load-path…)了。</p>
+<p>保存初始化文件后重启emacs，现在按下<strong>M-x package-install [RET]</strong>，最底下的缓冲区会显示”Install package:”来提示你输入想要安装的拓展包，下面的文章会有示例。或者<strong>M-x list-packages</strong>打开包列表，网络原因可能比较卡，稍等一下进入新的缓冲区。在列表中选择一个拓展包[RET]可以直接看到详细信息，“i”、“U”(注意大写)、“d”分别对应的是标记一个拓展包为预备安装/更新/删除状态，按“u”取消你标记的状态，“x”执行之前的标记。</p>
+<p>另外，你可以对这个管理进行自定义设置：</p>
+<pre><code>M-x customize-variable [RET] package-archives [RET]
+</code></pre><p>如果你是从网上或者别人那里直接得到的init.el文件，其中一般会有一段代码在开启emacs的时候预装需要的拓展包，比如我的文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">;;write in your .emacs.d/init.el</div><div class="line">;;----------------------------------------</div><div class="line">;;init package check</div><div class="line">(when (not package-archive-contents)</div><div class="line">  (package-refresh-contents))</div><div class="line"></div><div class="line">(defvar myPackages</div><div class="line">  &apos;(better-defaults</div><div class="line">    ein</div><div class="line">    elpy</div><div class="line">    flycheck</div><div class="line">    auto-complete</div><div class="line">    popup</div><div class="line">    pos-tip</div><div class="line">    tabbar</div><div class="line">    fuzzy</div><div class="line">    fuzzy-format</div><div class="line">    ac-slime</div><div class="line">    monokai</div><div class="line">    ;;yasnippet</div><div class="line">    py-autopep8))</div><div class="line"></div><div class="line">(mapc #&apos;(lambda (package)</div><div class="line">    (unless (package-installed-p package)</div><div class="line">      (package-install package)))</div><div class="line">      myPackages)</div></pre></td></tr></table></figure>
+<p>这些拓展包会被安装在.emacs.d/elpa下，如果你把这些代码写入了init.el，文章后边所有的<strong>M-x package-install</strong>就可以省略了。</p>
+<h2 id="配色与高亮"><a href="#配色与高亮" class="headerlink" title="配色与高亮"></a>配色与高亮</h2><p>先打开全局高亮设置，打开emacs之后，按<strong>M-x global-font-lock-mode</strong>，这时就可以打开对关键词的高亮显示。如果再次进行同样的操作则会关闭高亮显示。每次都这么做可能显得有点麻烦，所以你可以把它写进.emacs.d/init.el文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">;;write in your .emacs.d/init.el</div><div class="line">;;----------------------------------------</div><div class="line">;;global high light mode</div><div class="line">(global-font-lock-mode t)</div></pre></td></tr></table></figure>
+<p>现在你看到的基本上是emacs的默认高亮配色，接下来我们看看怎么选择适合自己的颜色配置。</p>
+<p>按下<strong>M-x package-install [RET] color-theme [RET]</strong>，emacs就会自动在服务器上下载该包进行安装，这个过程中编辑器可能会出现一些卡死或者无响应的状态，不要急，稍微等一等就好了。</p>
+<p>安装完成以后同样<strong>M-x color-theme-select</strong>自动打开一个新的缓冲区，这里你可以自行选择喜欢的颜色配置。原则上来说，关键词醒目，代码有层次感，背景偏暗，久看不会<br>累眼的配色比较好。个人特别喜欢Sublime Text的默认配色，也想在emacs中使用这样的颜色配置，所以google到了monokai这个配色包，安装也是特别方便：</p>
+<p><strong>M-x [RET] package-install [RET] monokai-theme </strong>， 同时在初始化文件中添加以下代码，重启看效果吧：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">;;write in your .emacs.d/init.el</div><div class="line">;;----------------------------------------</div><div class="line">;;monokai color theme</div><div class="line">(load-theme &apos;monokai t)</div></pre></td></tr></table></figure>
+<h2 id="代码补全和相关增强"><a href="#代码补全和相关增强" class="headerlink" title="代码补全和相关增强"></a>代码补全和相关增强</h2><p>有了ELPA，我们拓展包的安装就很简单了，下面是代码补全拓展和补全相关增强的插件列表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">packages</th>
+<th style="text-align:left">name in ELPA list</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">自动补全主库</td>
+<td style="text-align:left">auto-complete</td>
+</tr>
+<tr>
+<td style="text-align:left">补全列表弹出插件</td>
+<td style="text-align:left">popup</td>
+</tr>
+<tr>
+<td style="text-align:left">增强列表模式</td>
+<td style="text-align:left">pos-tip</td>
+</tr>
+<tr>
+<td style="text-align:left">模糊补全插件</td>
+<td style="text-align:left">fuzzy</td>
+</tr>
+<tr>
+<td style="text-align:left">slime补全支持</td>
+<td style="text-align:left">ac-slime</td>
+</tr>
+</tbody>
+</table>
+<p>首先：</p>
+<pre><code>M-x package-install [RET] {name in ELPA list} [RET]
+</code></pre><p>依次装好以后就可以编辑init文件了，引用ac拓展包，开启默认设置;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">;;write in your .emacs.d/init.el</div><div class="line">;;----------------------------------------</div><div class="line">;;ac/auto-complete</div><div class="line"></div><div class="line">(require &apos;auto-complete)</div><div class="line">(require &apos;auto-complete-config)</div><div class="line">(ac-config-default)</div><div class="line">(auto-complete-mode 1)</div></pre></td></tr></table></figure>
+<p>这一步完成自动补全主库就设置完成了，在编辑文档的时候对关键词使用Tab键或者回车键都可以看到补全效果，双击Tab会另外打开一个buffer显示可供补全的字符，然而这种方式多少有些麻烦。下面的设置将补全提示改为一个即时的弹出框，并且可以用上下键或者更多字符引索来查看可用的补全。</p>
+<p>引用pos-tip增强包，设置二级弹出帮助框quick-help对pos-tip的兼容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">;;write in your .emacs.d/init.el</div><div class="line">;;----------------------------------------</div><div class="line">;;ac/pos-tip</div><div class="line">(require &apos;pos-tip)</div><div class="line">(setq ac-quick-help-prefer-pos-tip t)</div></pre></td></tr></table></figure>
+<p>pos-tip其实就是popup的增强模式，可以通过颜色和标识符标识出哪些补全是系统给出的，哪些是用户定义的。</p>
+<p>打开帮助框quick-help，并设置其弹出的延迟时间为1s：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">;;write in your .emacs.d/init.el</div><div class="line">;;----------------------------------------</div><div class="line">;;ac/quick-help</div><div class="line">(setq ac-use-quick-help t)</div><div class="line">(setq ac-quick-help-delay 1.0)</div></pre></td></tr></table></figure>
+<p>打开TAB使用补全模式，并设置在退格操作之后仍然持续弹出补全：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">;;write in your .emacs.d/init.el</div><div class="line">;;----------------------------------------</div><div class="line">;;ac/tab mode &amp; backward continue</div><div class="line">(setq ac-dwim t)</div><div class="line">(setq ac-trigger-commands</div><div class="line">      (cons &apos;backward-delete-char-untabify ac-trigger-commands))</div></pre></td></tr></table></figure>
+<p>再打开fuzzy补全模式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">;;write in your .emacs.d/init.el</div><div class="line">;;----------------------------------------</div><div class="line">;;ac/fuzzy-mode</div><div class="line">(require &apos;fuzzy-format)</div><div class="line">(setq fuzzy-format-default-indent-tabs-mode nil)</div><div class="line">(global-fuzzy-format-mode t)</div><div class="line">(setq ac-fuzzy-enable t)</div></pre></td></tr></table></figure>
+<p>最后加上ac-slime的设置，它会在slime生效的模式和slime的REPL中分别添加两个钩子(hook)挂起slime-ac，并在ac补全生效后打开它们：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">;;write in your .emacs.d/init.el</div><div class="line">;;----------------------------------------</div><div class="line">;;ac/ac-slime</div><div class="line">(require &apos;ac-slime)</div><div class="line"> (add-hook &apos;slime-mode-hook &apos;set-up-slime-ac)</div><div class="line"> (add-hook &apos;slime-repl-mode-hook &apos;set-up-slime-ac)</div><div class="line"> (eval-after-load &quot;auto-complete&quot;</div><div class="line">   &apos;(add-to-list &apos;ac-modes &apos;slime-repl-mode))</div></pre></td></tr></table></figure>
+<p>唯一需要注意的是在.lisp文件中，如果你需要通过ac-slime使用补全，必须先<strong>M-x slime</strong>开启slime模式的REPL，否则在文本编辑中ac是没有任何反应的。</p>
+<h2 id="模板展开"><a href="#模板展开" class="headerlink" title="模板展开"></a>模板展开</h2><p>什么是模板展开？</p>
+<p>很简单，就是你键入设定好的关键词之后可以直接补全为任意你设定好的文本。这就表示yasnippet的模板展开可以有无限的可能性，唯一限制你的就是想象力。我们先把yasnippet配置好，再看看具体的列子：</p>
+<pre><code>M-x package-isntall [RET] yasnippet [RET]
+</code></pre><p>然后是配置文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">;;write in your .emacs.d/init.el</div><div class="line">;;----------------------------------------</div><div class="line">;;yasnippet</div><div class="line">(require &apos;yasnippet)</div><div class="line">(yas-global-mode 1)</div></pre></td></tr></table></figure>
+<p>保存init.el文件，重启emacs。首先是insert命令：</p>
+<pre><code>M-x yas-insert-snippet [RET] {key words} [RET]
+</code></pre><p>填入你需要拓展的模板关键词{keys words}在光标处插入选定的模板，如果先不确定要使用的关键词是什么可以在第一个回车后双击Tab键，弹出的buffer中会显示所有的关键词。另外可以查看一下对应模板文件是怎么样的：</p>
+<pre><code>M-x yas-visit-snippet-file [RET] {keys words} [RET]
+</code></pre><p>因为之前我们设置了auto-complete，在你输入关键词的时候会在popup弹窗中显示你的模板，仅用Tab键就能直接展开模板。</p>
+<p>现在我们来定制自己的模板：</p>
+<pre><code>M-x yas-new-sinppet
+</code></pre><p>emacs会为你打开一个新的buffer，先按<strong>C-x C-s</strong>保存该文件初始化sinppet文件目录，这时emacs会提示你是否在.emacs.d文件夹下创建一个名为snippet的文件夹，该文件会最终保存在当前buffer对应模式的文件下，值得注意的是这个文件不需要后缀名。比如我们在python模式下定制，编辑snippet文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">;;write in your .emacs.d/snippet/python-mode</div><div class="line">;;----------------------------------------</div><div class="line">;;data-split-sinppet</div><div class="line"># -*- mode: snippet -*-</div><div class="line"># name: test-data-split</div><div class="line"># key: tdsplit</div><div class="line"># --</div><div class="line">from sklearn.model_selection import train_test_split</div><div class="line"></div><div class="line">X_train, X_test, y_train, y_test = train_test_split($&#123;1:features&#125;, $&#123;2:y_set&#125;, random_state = $&#123;3:&#125;, test_size = $&#123;4:&#125;)</div></pre></td></tr></table></figure>
+<p>在用python/sklearn做数据分析的时候，基本每次都会固定有一个分割数据的动作，每次都手动把这么长一串输上去很麻烦，这个sinnpet让你只用输入tdsplit，按Tab键就可以展开这段代码，继续按Tab键，光标会按照{}里数字的顺序移动到你用$标记的地方，并在有用户输入时取代“：”后边的提示字符。</p>
+<h2 id="标签窗口"><a href="#标签窗口" class="headerlink" title="标签窗口"></a>标签窗口</h2><p>有喜欢侧边栏的朋友可以在<a href="http://ecb.sourceforge.net/" target="_blank" rel="external">这里</a>找到ECB的相关资料。它会把emacs变成一个code Browser，内容包括:</p>
+<ul>
+<li>Directories窗口，显示目录结构</li>
+<li>Sources窗口，显示当前目录下的文件列表</li>
+<li>Methods窗口，显示当前文件中的函数/类/成员列表</li>
+<li>History窗口，显示最近访问过的文件</li>
+</ul>
+<p>我个人觉得这个东西没什么必要，要看目录和文件结构<strong>C-x d</strong>就可以了，要方便文件之间切换和多开buffer或者使用<strong>tabber</strong>，每次打开emacs加载ECB加载慢，把你的代码窗口也挤小了。其实就是用ECB一点儿也不emacser，你真的喜欢这样的Browser不如去用其他编辑器，不折腾，不闹心。说真的，如果你有个从来不折腾不闹心的女朋友，<font color="#00EE00">你不会觉得哪里哪里不对劲吗？</font></p>
+<p>下面就说一下tabbar的安装和配置，<strong>M-x package-install [RET] tabbar [RET]</strong>。之后在初始化配置文件中写下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">;;write in your .emacs.d/init.el</div><div class="line">;;----------------------------------------</div><div class="line">;;tabber</div><div class="line">(require &apos;tabbar)                       </div><div class="line">(tabbar-mode 1)                       </div><div class="line">(global-set-key (kbd &quot;&lt;s-left&gt;&quot;) &apos;tabbar-backward)</div><div class="line">(global-set-key (kbd &quot;&lt;s-right&gt;&quot;) &apos;tabbar-forward)</div></pre></td></tr></table></figure>
+<p>这里我用kbd函数绑定了标签窗口的切换快捷键：窗口键+左右。因为tabbar对buffer是默认分组的，这个快捷切换会在不同分组中切换，如果你只想切换不同的分组，可以绑定自己喜欢的键位到<strong>‘tabbar-backward/forward-group</strong>上。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li><a href="https://www.emacswiki.org/emacs/ELPA" target="_blank" rel="external">Emacswiki-ELPA</a></li>
+<li><a href="http://ergoemacs.org/emacs/emacs_package_system.html" target="_blank" rel="external">Emacs: How to Install Packages Using ELPA, MELPA</a></li>
+<li><a href="https://github.com/purcell/ac-slime" target="_blank" rel="external">Slime completion source for Emacs auto-complete package</a></li>
+<li><a href="http://docs.huihoo.com/homepage/shredderyin/emacs.html" target="_blank" rel="external">Emacs编辑器，王垠</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://fjakeys.github.io/2017/07/21/common-lisp+env/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -669,7 +902,7 @@ distribution for more information.
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -682,7 +915,7 @@ distribution for more information.
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
