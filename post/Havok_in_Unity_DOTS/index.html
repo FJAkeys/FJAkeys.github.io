@@ -1,0 +1,213 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>keysyanspace</title>
+<meta name="description" content="May the flame guide thee." />
+<link rel="shortcut icon" href="https://fjakeys.github.io/favicon.ico?v=1662261410971">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://fjakeys.github.io/styles/main.css">
+
+
+
+
+    
+  <link rel="stylesheet" href="https://fjakeys.github.io/highlight/styles/monokai-sublime.min.css">
+  <script src="https://fjakeys.github.io/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://fjakeys.github.io">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://fjakeys.github.io/images/avatar.png?v=1662261410971" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">keysyanspace</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE">环境配置</a>
+<ul>
+<li><a href="#entity%E5%AE%89%E8%A3%85">Entity安装</a></li>
+<li><a href="#hybird-renderer%E5%AE%89%E8%A3%85">Hybird Renderer安装</a></li>
+<li><a href="#havok-physics-for-unity%E5%AE%89%E8%A3%85">Havok Physics for Unity安装</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BD%AC%E6%8D%A2gameobject%E4%B8%BAentity">转换GameObject为Entity</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AEhavok-physics">配置Havok Physics</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          MAIN
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          ARCHIVES
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          TAGS
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">contact me at k@keysyanspace.com</div>
+    <a class="rss" href="https://fjakeys.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">在Unity中通过DOTS使用Havok Physics引擎</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2021-11-21 / 4 min read
+        </div>
+        
+        <div class="post-content yue">
+          <p>本文是一个简单的入门配置流程，暂不涉及ECS以及Havok引擎的介绍和分析，有兴趣的读者可以自行网上查阅。</p>
+<p>使用的Unity版本: 2020.3.22f1c1(LTS)   URP 10.7.0</p>
+<h2 id="环境配置">环境配置</h2>
+<p>需要的Packages有：</p>
+<ul>
+<li>
+<p>Entities</p>
+</li>
+<li>
+<p>Havok Physics for Unity</p>
+</li>
+<li>
+<p>Hybrid Renderer</p>
+</li>
+</ul>
+<p>首先是<font size=4><strong>在Unity2020之后，启用预览包移到了菜单栏 Edit &gt; Project Settings &gt; Package Manager 中的Enable Preview Packages</strong></font>。</p>
+<p>之后在Package Manager里面还是无法找到Entities，因为从2020版本开始，Unity修改了Package Manager的一些策略，处于早期开发阶段以及开发不活跃的包无法直接搜索到，需要我们用URL的方式加载，过程如下：</p>
+<h3 id="entity安装">Entity安装</h3>
+<ol>
+<li>
+<p>打开Unity的菜单栏<code>Window &gt; Package Manager</code>。</p>
+</li>
+<li>
+<p>在左上角＋号图标选择<code>Add package from git URL</code>。</p>
+</li>
+</ol>
+<figure data-type="image" tabindex="1"><img src="https://fjakeys.github.io/post-images/1637498975975.png" alt="" width="300" height="300" loading="lazy"></figure>
+<ol start="3">
+<li>在输入框中输入<code>com.unity.entities</code>，然后点击Add按钮，稍等它安装一下。</li>
+</ol>
+<figure data-type="image" tabindex="2"><img src="https://fjakeys.github.io/post-images/1637499093592.png" alt="" width="300" height="300" loading="lazy"></figure>
+<p>如下图就安装好了：</p>
+<figure data-type="image" tabindex="3"><img src="https://fjakeys.github.io/post-images/1637499101210.png" alt="" width="300" height="300" loading="lazy"></figure>
+<p>安装好Entity的时候，Unity会自动为你安装好依赖的包，比如：Burst，Jobs。</p>
+<h3 id="hybird-renderer安装">Hybird Renderer安装</h3>
+<p>和上面步骤2中一样，我们Add package from git URL，填写com.unity.rendering.hybrid@0.11.0-preview.42，安装好Hybird Render，没有这个的话Entity就无法被渲染。</p>
+<figure data-type="image" tabindex="4"><img src="https://fjakeys.github.io/post-images/1637499107355.png" alt="" width="300" height="300" loading="lazy"></figure>
+<p>然后我们在Project Setting里面的player选单中找到<strong>Scripting Define Symbols</strong>，点击添加 <code>ENABLE_HYBRID_RENDERER_V2</code> ，</p>
+<p>这一步的作用是将刚刚安装好的Hybird Renderer从V1转成V2，一代的支持度还比较低，很多渲染方式都有限制，具体的情况可以查看官方文档在这里：<a href="https://docs.unity3d.com/Packages/com.unity.rendering.hybrid@0.11/manual/requirements-and-compatibility.html">Unity Manual: Hybird Renderer</a></p>
+<h3 id="havok-physics-for-unity安装">Havok Physics for Unity安装</h3>
+<p>直接在Package Manager右上角的搜索框中搜索Havok Physics for Unity安装即可。</p>
+<h2 id="转换gameobject为entity">转换GameObject为Entity</h2>
+<p>我们先建立一个测试用的平台和小球，在他们的Inspector里Add Component，输入Convert To Entity：</p>
+<figure data-type="image" tabindex="5"><img src="https://fjakeys.github.io/post-images/1637499117621.png" alt="" width="800" height="800" loading="lazy"></figure>
+<p>在通过Entity使用物理引擎，可以直接添加Physics Body、Physics Shape等，也可以直接像普通的工作流程一样添加Rigidbody，在下一次启动运行时，会自动被转换成Entity可以使用的属性，现在给小球加上Rigidbody，并运行查看：</p>
+<figure data-type="image" tabindex="6"><img src="https://fjakeys.github.io/post-images/1637499125919.gif" alt="" width="800" height="800" loading="lazy"></figure>
+<p>下面的Debug窗口在Window &gt; Analysis &gt; Entity Debugger打开，现在可以看到运行正常，刚刚设置转化为entity的平面和小球也在Debug窗口中显示出来了，但是现在我们还只是使用Unity内部的Physics X物理引擎，接下来我们转到Havok物理引擎去。<br>
+PS：这里建议还是直接使用Unity DOTS PHysics的组件Physics Body、Physics Shape来替代Collider和Rigidbody，因为有一些物理模型的设计方式可能有变化，比如摩擦和回弹。</p>
+<h2 id="配置havok-physics">配置Havok Physics</h2>
+<p>接下来的步骤很简单：</p>
+<ul>
+<li>
+<p>直接新建一个空的Game Object，重命名一下叫做PhysicsSetting，同样添加Convert To Entity把它转化为Entity</p>
+</li>
+<li>
+<p>再给它添加Physics Step，在Simulation Type中选择Havok Physics替代Unity Physics</p>
+</li>
+<li>
+<p>添加Havok Physics Configuration，记得勾选Enable Visual Debugger。这一步是方便我们一会儿在Havok Visual Debugger窗口里观察调试</p>
+</li>
+</ul>
+<p>最后就是这样：</p>
+<figure data-type="image" tabindex="7"><img src="https://fjakeys.github.io/post-images/1637499134573.png" alt="" width="500" height="500" loading="lazy"></figure>
+<p>接下来我们可以选Window &gt; Analysis &gt; Havok Visual Debugger，打开物理调试窗口，可以发现它与Havok物理引擎使用我们之前设置的25001本地端口进行通讯，这时点击运行，看看最后的效果吧：</p>
+<figure data-type="image" tabindex="8"><img src="https://fjakeys.github.io/post-images/1637499143811.gif" alt="" width="800" height="800" loading="lazy"></figure>
+<p>至此就是简单的在Unity中使用Havok引擎，现阶段Unity ECS的开发还不算太成熟，在逻辑、渲染和实际制作方面都有很多坑，留着以后慢慢踩了~</p>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://fjakeys.github.io/tag/T5lAzk2Cr/">
+            <span class="flex-auto">Unity</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://fjakeys.github.io/tag/s4wLMpFAE/">
+            <span class="flex-auto">gamedev</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://fjakeys.github.io/tag/6ApWV0_23/">
+            <span class="flex-auto">physics</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://fjakeys.github.io/tag/789ee9ho4/">
+            <span class="flex-auto">Havok</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://fjakeys.github.io/post/highlighting_code_in_gridea/">
+                <h3 class="post-title">
+                  <i class="ri-arrow-left-line"></i>
+                  给Gridea-Walker添加Highlight.js代码高亮
+                </h3>
+              </a>
+            </div>
+          
+
+          
+        </div>
+
+        
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

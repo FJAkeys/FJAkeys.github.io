@@ -1,0 +1,195 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>keysyanspace</title>
+<meta name="description" content="May the flame guide thee." />
+<link rel="shortcut icon" href="https://fjakeys.github.io/favicon.ico?v=1662261410971">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://fjakeys.github.io/styles/main.css">
+
+
+
+
+    
+  <link rel="stylesheet" href="https://fjakeys.github.io/highlight/styles/monokai-sublime.min.css">
+  <script src="https://fjakeys.github.io/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://fjakeys.github.io">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://fjakeys.github.io/images/avatar.png?v=1662261410971" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">keysyanspace</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E9%9C%80%E8%A6%81%E7%9A%84%E6%8F%92%E4%BB%B6">需要的插件</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95">安装方法</a></li>
+<li><a href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">注意事项</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          MAIN
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          ARCHIVES
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          TAGS
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">contact me at k@keysyanspace.com</div>
+    <a class="rss" href="https://fjakeys.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">使用Sublime Text编辑Markdown</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2022-08-31 / 2 min read
+        </div>
+        
+        <div class="post-content yue">
+          <p>东西很简单，废话不多说直接开干：</p>
+<h2 id="需要的插件">需要的插件</h2>
+<table>
+<thead>
+<tr>
+<th>插件名称</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MarkdownEditing</td>
+<td>编辑和显示优化，Markdown及代码块关键字语法高亮</td>
+</tr>
+<tr>
+<td>MarkdownPreview</td>
+<td>转HTML并在网页中渲染</td>
+</tr>
+<tr>
+<td>MarkdownLivePreview</td>
+<td>分屏实时预览</td>
+</tr>
+<tr>
+<td>LiveReload</td>
+<td>文本编辑到HTML网页的实时更新</td>
+</tr>
+</tbody>
+</table>
+<h2 id="安装方法">安装方法</h2>
+<ul>
+<li><code>Ctrl+Shift+P</code>叫出命令框</li>
+<li>输入<code>Package Control: Install Package</code>，初次会先安装Package Control包控制器本体，注意左下角加载信息</li>
+<li>在<code> Install Package</code>搜索框中搜要安装的包</li>
+</ul>
+<h2 id="注意事项">注意事项</h2>
+<ol>
+<li>MarkdownLivePreview装好要检查一下：<code>Preferences -&gt; Package Settings -&gt; MarkdownLivePreview -&gt; Settings</code>，在左边栏查看<code>&quot;markdown_live_preview_on_open&quot;</code>是否为<code>ture</code>，如果不是，就在右边栏里加一个<code>&quot;markdown_live_preview_on_open&quot;: true,</code>再重启 ；对应的Markdown Preview安装好后在<code>Settings</code>里检查左侧<code>enable_autoreload</code>是不是true，不是的话右侧栏加一条：</li>
+</ol>
+<pre><code class="language-json">{ &quot;enable_autoreload&quot;: true}
+</code></pre>
+<ol start="2">
+<li>MarkdownPreview在安装时要搜索<code>Markdown Preview： Preview in Browser</code>，然后一般选择<code>markdown</code>就行。另外可以加一个网页渲染的快捷键，方法是<code>Preferences -&gt; Key Bindings</code>打开的文件的右侧栏的中括号中添加一行代码：</li>
+</ol>
+<pre><code class="language-json">{ &quot;keys&quot;: [&quot;alt+m&quot;], &quot;command&quot;: &quot;markdown_preview&quot;, &quot;args&quot;: {&quot;target&quot;: &quot;browser&quot;, &quot;parser&quot;:&quot;markdown&quot;}  }
+</code></pre>
+<p>我设置的快捷键是<code>alt+m</code>，这个可以自己改，没有冲突就行。</p>
+<ol start="3">
+<li>LiveReload安装好了要 再次<code>Ctrl+shift+p</code>, 输入<code>LiveReload: Enable/disable plug-ins</code>, 回车, 选择 <code>Simple Reload with delay (400ms)</code>或者<code>Simple Reload</code>都可以，自己看着办</li>
+</ol>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://fjakeys.github.io/tag/QiQkg3kk5/">
+            <span class="flex-auto">markdown</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://fjakeys.github.io/tag/Swp8eUWr5G/">
+            <span class="flex-auto">blog</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://fjakeys.github.io/tag/P3pWmihkPA/">
+            <span class="flex-auto">editor</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://fjakeys.github.io/post/unity_csharp_with_sublime_text/">
+                <h3 class="post-title">
+                  <i class="ri-arrow-left-line"></i>
+                  关于Unity的C#复健计划及环境配置(Sublime Text3)
+                </h3>
+              </a>
+            </div>
+          
+
+          
+            <div class="next-post">
+              <a href="https://fjakeys.github.io/post/highlighting_code_in_gridea/">
+                <h3 class="post-title">
+                  给Gridea-Walker添加Highlight.js代码高亮
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://fjakeys.github.io</id>
+    <title>keysyanspace</title>
+    <updated>2022-09-04T03:18:36.397Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://fjakeys.github.io"/>
+    <link rel="self" href="https://fjakeys.github.io/atom.xml"/>
+    <subtitle>May the flame guide thee.</subtitle>
+    <logo>https://fjakeys.github.io/images/avatar.png</logo>
+    <icon>https://fjakeys.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2022, keysyanspace</rights>
+    <entry>
+        <title type="html"><![CDATA[关于Unity的C#复健计划及环境配置(Sublime Text3)]]></title>
+        <id>https://fjakeys.github.io/post/unity_csharp_with_sublime_text/</id>
+        <link href="https://fjakeys.github.io/post/unity_csharp_with_sublime_text/">
+        </link>
+        <updated>2022-09-01T03:14:03.000Z</updated>
+        <content type="html"><![CDATA[<p>因为各种杂事很久没有写过代码了，今天就开始复健计划吧。准备从基础开始复习一下所有的语言内容，然后到Unity的游戏开发，之后有时间也可能会出关于python的复健内容，包括爬虫、数据分析、人工智能等板块。<br>
+先把环境和工具配置好，我打算使用sublime text编辑器来调试和编写C#，可能没有VSC原生的一些功能支持（比如断点调试），但是因为简洁方便，同时也需要使用markdown来写这些文字，所以slime text算是一个比较好的选择吧。</p>
+<p>因为使用C#主要是给Unity写脚本用，所以事先确保已经正确的安装了Unity和Sublime Text3，下面开始配置步骤：</p>
+<h2 id="1安装mono">1.安装Mono</h2>
+<p>Mono是C#的一个跨平台编译环境，先不说跨平台部署的好处，单单是它提供给编辑器的ADA辅助就很好用。<br>
+<a href="https://www.mono-project.com/">官网</a>下载，注意选择32-bit for Windows版本，一路点next安装完就行。</p>
+<h2 id="2安装sublime-text的package-control">2.安装Sublime Text的Package Control</h2>
+<p><a href="https://packagecontrol.io/">官网</a>packagecontrol.io可以找到安装方法，现在安装都很简单了，直接<code>ctrl+shift+p</code>呼出命令面板，输入<code>Install Package Control</code>就可以找到安装。</p>
+<h2 id="3安装-omnisharp-插件">3.安装 OmniSharp 插件</h2>
+<p>接上一步完成后，在sublime text编辑器里<code>ctrl+shift+p</code>，输入<code>install package</code>回车，搜索OmniSharp并选择安装，安装成功后会弹出Readme 文件如下：<br>
+<img src="https://fjakeys.github.io/post-images/1662205568554.png" alt="" loading="lazy"></p>
+<h2 id="4安装unity-3d-shaderhighliter">4.安装Unity 3D-shaderHighliter</h2>
+<p>还是一样的<code>ctrl+shift+p</code>，输入<code>install package</code>回车，搜索Unity 3D，列表里面就能找到。<br>
+这个插件是在编辑shader文件的时候可以显示高亮。</p>
+<h2 id="5安装c-snippets">5.安装C# Snippets</h2>
+<p>还是和上面两个一样的安装，不具体说了，用来自动补全。</p>
+<h2 id="6unity-编辑器配置">6.Unity 编辑器配置</h2>
+<p>打开 Unity，在菜单栏上选择<code>Edit &gt; Preferences &gt; External Tools</code>，然后将：</p>
+<blockquote>
+<p>External Script Editor选Sublime Text3.exe<br>
+External Script Editor Args填写为&quot;<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>F</mi><mi>i</mi><mi>l</mi><mi>e</mi><mo>)</mo><mi mathvariant="normal">&quot;</mi><mo>:</mo></mrow><annotation encoding="application/x-tex">(File)&quot;:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mclose">)</span><span class="mord">&quot;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span></span></span>(Line)</p>
+</blockquote>
+<h2 id="7为omnisharp配置项目路径">7.为Omnisharp配置项目路径</h2>
+<blockquote>
+<p><strong>注意：这一步是每次新建了Unity项目都要做的</strong></p>
+</blockquote>
+<p>这里我现在Unity中创建了一个叫做<code>test_with_sublime</code>的项目，然后：</p>
+<ul>
+<li>在Sublime中<code>File &gt; Open Folder</code>打开Unity建好的项目<code>test_with_sublime</code>。</li>
+<li>点<code>Project &gt; Save Project As</code>选到<code>test_with_sublime</code>目录下创建一个文件叫做<code>test_with_sublime.sublime-project</code>，这个文件的名字应该和你的Unity项目名以及项目文件夹下.sln文件的名称一致。</li>
+<li>在<code>test_with_sublime.sublime-project</code>文件中写入并保存：</li>
+</ul>
+<pre><code class="language-json">{
+    &quot;folders&quot;:
+    [
+        {   &quot;follow_symlinks&quot;:true,
+            &quot;path&quot;: &quot;./Assets&quot;,
+            &quot;file_exclude_patterns&quot;: 
+            [
+            &quot;*.meta&quot;,
+            &quot;*.dll&quot;
+            ]
+        }
+    ],
+    &quot;solution_file&quot;: &quot;./test_with_sublime.sln&quot;
+}
+</code></pre>
+<ul>
+<li>重启Sublime，<code>Project &gt; Open Project</code>选项目内的*.sublime-project文件，我这里就是<code>test_with_sublime.sublime-project</code>，配置完成。</li>
+</ul>
+<h2 id="8hello-world">8.“Hello World！”</h2>
+<p>典中典，来搞一下：<br>
+Unity项目已经建好了就是test_with_sublime，打开Unity，在Assets目录下新建一个文件夹Scripts用来存放C#脚本，  在Scripts下新建一个C# script，命名为Hello.cs，双击打开，Unity会自动切换到Sublime，而且有一段已经写好的框架，我们正好只用在Strat里写一句就好：</p>
+<pre><code class="language-csharp">using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class hello : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        Debug.Log(&quot;Hello World!&quot;);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
+</code></pre>
+<p>保存后切回Unity，在“Hierarchy”窗口右键选“Creat Empty”，会创建一个“GameObject”，<br>
+我们可以把之前写好的Hello.cs拖拽到它的组件栏，或在组件栏添加组件，输入Hello并选择：<br>
+<img src="https://fjakeys.github.io/post-images/1662260887410.png" alt="" loading="lazy"></p>
+<p>然后基本就搞定了，点击运行键，就可以看到：<br>
+<img src="https://fjakeys.github.io/post-images/1662260929725.png" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[使用Sublime Text编辑Markdown]]></title>
+        <id>https://fjakeys.github.io/post/markdown_with_sublime_text/</id>
+        <link href="https://fjakeys.github.io/post/markdown_with_sublime_text/">
+        </link>
+        <updated>2022-08-31T03:07:47.000Z</updated>
+        <content type="html"><![CDATA[<p>东西很简单，废话不多说直接开干：</p>
+<h2 id="需要的插件">需要的插件</h2>
+<table>
+<thead>
+<tr>
+<th>插件名称</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MarkdownEditing</td>
+<td>编辑和显示优化，Markdown及代码块关键字语法高亮</td>
+</tr>
+<tr>
+<td>MarkdownPreview</td>
+<td>转HTML并在网页中渲染</td>
+</tr>
+<tr>
+<td>MarkdownLivePreview</td>
+<td>分屏实时预览</td>
+</tr>
+<tr>
+<td>LiveReload</td>
+<td>文本编辑到HTML网页的实时更新</td>
+</tr>
+</tbody>
+</table>
+<h2 id="安装方法">安装方法</h2>
+<ul>
+<li><code>Ctrl+Shift+P</code>叫出命令框</li>
+<li>输入<code>Package Control: Install Package</code>，初次会先安装Package Control包控制器本体，注意左下角加载信息</li>
+<li>在<code> Install Package</code>搜索框中搜要安装的包</li>
+</ul>
+<h2 id="注意事项">注意事项</h2>
+<ol>
+<li>MarkdownLivePreview装好要检查一下：<code>Preferences -&gt; Package Settings -&gt; MarkdownLivePreview -&gt; Settings</code>，在左边栏查看<code>&quot;markdown_live_preview_on_open&quot;</code>是否为<code>ture</code>，如果不是，就在右边栏里加一个<code>&quot;markdown_live_preview_on_open&quot;: true,</code>再重启 ；对应的Markdown Preview安装好后在<code>Settings</code>里检查左侧<code>enable_autoreload</code>是不是true，不是的话右侧栏加一条：</li>
+</ol>
+<pre><code class="language-json">{ &quot;enable_autoreload&quot;: true}
+</code></pre>
+<ol start="2">
+<li>MarkdownPreview在安装时要搜索<code>Markdown Preview： Preview in Browser</code>，然后一般选择<code>markdown</code>就行。另外可以加一个网页渲染的快捷键，方法是<code>Preferences -&gt; Key Bindings</code>打开的文件的右侧栏的中括号中添加一行代码：</li>
+</ol>
+<pre><code class="language-json">{ &quot;keys&quot;: [&quot;alt+m&quot;], &quot;command&quot;: &quot;markdown_preview&quot;, &quot;args&quot;: {&quot;target&quot;: &quot;browser&quot;, &quot;parser&quot;:&quot;markdown&quot;}  }
+</code></pre>
+<p>我设置的快捷键是<code>alt+m</code>，这个可以自己改，没有冲突就行。</p>
+<ol start="3">
+<li>LiveReload安装好了要 再次<code>Ctrl+shift+p</code>, 输入<code>LiveReload: Enable/disable plug-ins</code>, 回车, 选择 <code>Simple Reload with delay (400ms)</code>或者<code>Simple Reload</code>都可以，自己看着办</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[给Gridea-Walker添加Highlight.js代码高亮]]></title>
+        <id>https://fjakeys.github.io/post/highlighting_code_in_gridea/</id>
+        <link href="https://fjakeys.github.io/post/highlighting_code_in_gridea/">
+        </link>
+        <updated>2022-08-30T14:17:13.000Z</updated>
+        <content type="html"><![CDATA[<p>Walker主题的默认代码高亮用的prism.js真是太shit了，然后不知道为什么这个主题的作者还写了一个喝了 <s>酒</s> 翔才写得出来的scripts.ejs然后插在每一个ejs后引用，真的有毛病。<br>
+下面就来改一下：</p>
+<h2 id="1下载-highlightjs">1.下载 highlight.js</h2>
+<p>在<a href="https://highlightjs.org/">官网</a>下载 highlight.js，虽然也可以从cdnjs、jsdelivr和unpkg远程引用js，但是自己选择定制的包可以把不用的语言忽略掉。直接在download页面的Custom package一栏选择需要高亮的语言，点击<code>Download</code>按钮，下载解压。</p>
+<blockquote>
+<p>注意：解压好的highlight文件夹需要放在站点源文件路径下的Gridea\static里，如图：<br>
+<img src="https://fjakeys.github.io/post-images/1662103000619.png" alt="" loading="lazy"></p>
+</blockquote>
+<h2 id="2修改主题文件">2.修改主题文件</h2>
+<p>我用的主题是Walker，需要修改的文件有两个:</p>
+<ul>
+<li>Gridea\themes\walker\templates\post.ejs<br>
+在head里加入：</li>
+</ul>
+<pre><code class="language-html">  &lt;link rel=&quot;stylesheet&quot; href=&quot;&lt;%= themeConfig.domain %&gt;/highlight/styles/monokai-sublime.min.css&quot;&gt;
+  &lt;script src=&quot;&lt;%= themeConfig.domain %&gt;/highlight/highlight.min.js&quot;&gt;&lt;/script&gt;
+  &lt;script&gt;hljs.highlightAll();&lt;/script&gt;
+</code></pre>
+<p>monokai-sublime是我选的高亮配色主题，你也可以在highlight文件夹里的styles里随便选自己喜欢的，代码添加的位置如图：<img src="https://fjakeys.github.io/post-images/1662109835835.png" alt="" loading="lazy"></p>
+<ul>
+<li>Gridea\themes\walker\templates\includes\scripts.ejs<br>
+这个文件里的所有内容全部删干净，不然会覆盖影响highlight的正常渲染显示</li>
+</ul>
+<p>就是这么简单了。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[在Unity中通过DOTS使用Havok Physics引擎]]></title>
+        <id>https://fjakeys.github.io/post/Havok_in_Unity_DOTS/</id>
+        <link href="https://fjakeys.github.io/post/Havok_in_Unity_DOTS/">
+        </link>
+        <updated>2021-11-21T12:36:56.000Z</updated>
+        <content type="html"><![CDATA[<p>本文是一个简单的入门配置流程，暂不涉及ECS以及Havok引擎的介绍和分析，有兴趣的读者可以自行网上查阅。</p>
+<p>使用的Unity版本: 2020.3.22f1c1(LTS)   URP 10.7.0</p>
+<h2 id="环境配置">环境配置</h2>
+<p>需要的Packages有：</p>
+<ul>
+<li>
+<p>Entities</p>
+</li>
+<li>
+<p>Havok Physics for Unity</p>
+</li>
+<li>
+<p>Hybrid Renderer</p>
+</li>
+</ul>
+<p>首先是<font size=4><strong>在Unity2020之后，启用预览包移到了菜单栏 Edit &gt; Project Settings &gt; Package Manager 中的Enable Preview Packages</strong></font>。</p>
+<p>之后在Package Manager里面还是无法找到Entities，因为从2020版本开始，Unity修改了Package Manager的一些策略，处于早期开发阶段以及开发不活跃的包无法直接搜索到，需要我们用URL的方式加载，过程如下：</p>
+<h3 id="entity安装">Entity安装</h3>
+<ol>
+<li>
+<p>打开Unity的菜单栏<code>Window &gt; Package Manager</code>。</p>
+</li>
+<li>
+<p>在左上角＋号图标选择<code>Add package from git URL</code>。</p>
+</li>
+</ol>
+<figure data-type="image" tabindex="1"><img src="https://fjakeys.github.io/post-images/1637498975975.png" alt="" width="300" height="300" loading="lazy"></figure>
+<ol start="3">
+<li>在输入框中输入<code>com.unity.entities</code>，然后点击Add按钮，稍等它安装一下。</li>
+</ol>
+<figure data-type="image" tabindex="2"><img src="https://fjakeys.github.io/post-images/1637499093592.png" alt="" width="300" height="300" loading="lazy"></figure>
+<p>如下图就安装好了：</p>
+<figure data-type="image" tabindex="3"><img src="https://fjakeys.github.io/post-images/1637499101210.png" alt="" width="300" height="300" loading="lazy"></figure>
+<p>安装好Entity的时候，Unity会自动为你安装好依赖的包，比如：Burst，Jobs。</p>
+<h3 id="hybird-renderer安装">Hybird Renderer安装</h3>
+<p>和上面步骤2中一样，我们Add package from git URL，填写com.unity.rendering.hybrid@0.11.0-preview.42，安装好Hybird Render，没有这个的话Entity就无法被渲染。</p>
+<figure data-type="image" tabindex="4"><img src="https://fjakeys.github.io/post-images/1637499107355.png" alt="" width="300" height="300" loading="lazy"></figure>
+<p>然后我们在Project Setting里面的player选单中找到<strong>Scripting Define Symbols</strong>，点击添加 <code>ENABLE_HYBRID_RENDERER_V2</code> ，</p>
+<p>这一步的作用是将刚刚安装好的Hybird Renderer从V1转成V2，一代的支持度还比较低，很多渲染方式都有限制，具体的情况可以查看官方文档在这里：<a href="https://docs.unity3d.com/Packages/com.unity.rendering.hybrid@0.11/manual/requirements-and-compatibility.html">Unity Manual: Hybird Renderer</a></p>
+<h3 id="havok-physics-for-unity安装">Havok Physics for Unity安装</h3>
+<p>直接在Package Manager右上角的搜索框中搜索Havok Physics for Unity安装即可。</p>
+<h2 id="转换gameobject为entity">转换GameObject为Entity</h2>
+<p>我们先建立一个测试用的平台和小球，在他们的Inspector里Add Component，输入Convert To Entity：</p>
+<figure data-type="image" tabindex="5"><img src="https://fjakeys.github.io/post-images/1637499117621.png" alt="" width="800" height="800" loading="lazy"></figure>
+<p>在通过Entity使用物理引擎，可以直接添加Physics Body、Physics Shape等，也可以直接像普通的工作流程一样添加Rigidbody，在下一次启动运行时，会自动被转换成Entity可以使用的属性，现在给小球加上Rigidbody，并运行查看：</p>
+<figure data-type="image" tabindex="6"><img src="https://fjakeys.github.io/post-images/1637499125919.gif" alt="" width="800" height="800" loading="lazy"></figure>
+<p>下面的Debug窗口在Window &gt; Analysis &gt; Entity Debugger打开，现在可以看到运行正常，刚刚设置转化为entity的平面和小球也在Debug窗口中显示出来了，但是现在我们还只是使用Unity内部的Physics X物理引擎，接下来我们转到Havok物理引擎去。<br>
+PS：这里建议还是直接使用Unity DOTS PHysics的组件Physics Body、Physics Shape来替代Collider和Rigidbody，因为有一些物理模型的设计方式可能有变化，比如摩擦和回弹。</p>
+<h2 id="配置havok-physics">配置Havok Physics</h2>
+<p>接下来的步骤很简单：</p>
+<ul>
+<li>
+<p>直接新建一个空的Game Object，重命名一下叫做PhysicsSetting，同样添加Convert To Entity把它转化为Entity</p>
+</li>
+<li>
+<p>再给它添加Physics Step，在Simulation Type中选择Havok Physics替代Unity Physics</p>
+</li>
+<li>
+<p>添加Havok Physics Configuration，记得勾选Enable Visual Debugger。这一步是方便我们一会儿在Havok Visual Debugger窗口里观察调试</p>
+</li>
+</ul>
+<p>最后就是这样：</p>
+<figure data-type="image" tabindex="7"><img src="https://fjakeys.github.io/post-images/1637499134573.png" alt="" width="500" height="500" loading="lazy"></figure>
+<p>接下来我们可以选Window &gt; Analysis &gt; Havok Visual Debugger，打开物理调试窗口，可以发现它与Havok物理引擎使用我们之前设置的25001本地端口进行通讯，这时点击运行，看看最后的效果吧：</p>
+<figure data-type="image" tabindex="8"><img src="https://fjakeys.github.io/post-images/1637499143811.gif" alt="" width="800" height="800" loading="lazy"></figure>
+<p>至此就是简单的在Unity中使用Havok引擎，现阶段Unity ECS的开发还不算太成熟，在逻辑、渲染和实际制作方面都有很多坑，留着以后慢慢踩了~</p>
+]]></content>
+    </entry>
+</feed>

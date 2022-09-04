@@ -1,0 +1,207 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>keysyanspace</title>
+<meta name="description" content="May the flame guide thee." />
+<link rel="shortcut icon" href="https://fjakeys.github.io/favicon.ico?v=1662261410971">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://fjakeys.github.io/styles/main.css">
+
+
+
+
+    
+  <link rel="stylesheet" href="https://fjakeys.github.io/highlight/styles/monokai-sublime.min.css">
+  <script src="https://fjakeys.github.io/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://fjakeys.github.io">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://fjakeys.github.io/images/avatar.png?v=1662261410971" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">keysyanspace</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#1%E5%AE%89%E8%A3%85mono">1.安装Mono</a></li>
+<li><a href="#2%E5%AE%89%E8%A3%85sublime-text%E7%9A%84package-control">2.安装Sublime Text的Package Control</a></li>
+<li><a href="#3%E5%AE%89%E8%A3%85-omnisharp-%E6%8F%92%E4%BB%B6">3.安装 OmniSharp 插件</a></li>
+<li><a href="#4%E5%AE%89%E8%A3%85unity-3d-shaderhighliter">4.安装Unity 3D-shaderHighliter</a></li>
+<li><a href="#5%E5%AE%89%E8%A3%85c-snippets">5.安装C# Snippets</a></li>
+<li><a href="#6unity-%E7%BC%96%E8%BE%91%E5%99%A8%E9%85%8D%E7%BD%AE">6.Unity 编辑器配置</a></li>
+<li><a href="#7%E4%B8%BAomnisharp%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9B%AE%E8%B7%AF%E5%BE%84">7.为Omnisharp配置项目路径</a></li>
+<li><a href="#8hello-world">8.“Hello World！”</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          MAIN
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          ARCHIVES
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          TAGS
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">contact me at k@keysyanspace.com</div>
+    <a class="rss" href="https://fjakeys.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">关于Unity的C#复健计划及环境配置(Sublime Text3)</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2022-09-01 / 4 min read
+        </div>
+        
+        <div class="post-content yue">
+          <p>因为各种杂事很久没有写过代码了，今天就开始复健计划吧。准备从基础开始复习一下所有的语言内容，然后到Unity的游戏开发，之后有时间也可能会出关于python的复健内容，包括爬虫、数据分析、人工智能等板块。<br>
+先把环境和工具配置好，我打算使用sublime text编辑器来调试和编写C#，可能没有VSC原生的一些功能支持（比如断点调试），但是因为简洁方便，同时也需要使用markdown来写这些文字，所以slime text算是一个比较好的选择吧。</p>
+<p>因为使用C#主要是给Unity写脚本用，所以事先确保已经正确的安装了Unity和Sublime Text3，下面开始配置步骤：</p>
+<h2 id="1安装mono">1.安装Mono</h2>
+<p>Mono是C#的一个跨平台编译环境，先不说跨平台部署的好处，单单是它提供给编辑器的ADA辅助就很好用。<br>
+<a href="https://www.mono-project.com/">官网</a>下载，注意选择32-bit for Windows版本，一路点next安装完就行。</p>
+<h2 id="2安装sublime-text的package-control">2.安装Sublime Text的Package Control</h2>
+<p><a href="https://packagecontrol.io/">官网</a>packagecontrol.io可以找到安装方法，现在安装都很简单了，直接<code>ctrl+shift+p</code>呼出命令面板，输入<code>Install Package Control</code>就可以找到安装。</p>
+<h2 id="3安装-omnisharp-插件">3.安装 OmniSharp 插件</h2>
+<p>接上一步完成后，在sublime text编辑器里<code>ctrl+shift+p</code>，输入<code>install package</code>回车，搜索OmniSharp并选择安装，安装成功后会弹出Readme 文件如下：<br>
+<img src="https://fjakeys.github.io/post-images/1662205568554.png" alt="" loading="lazy"></p>
+<h2 id="4安装unity-3d-shaderhighliter">4.安装Unity 3D-shaderHighliter</h2>
+<p>还是一样的<code>ctrl+shift+p</code>，输入<code>install package</code>回车，搜索Unity 3D，列表里面就能找到。<br>
+这个插件是在编辑shader文件的时候可以显示高亮。</p>
+<h2 id="5安装c-snippets">5.安装C# Snippets</h2>
+<p>还是和上面两个一样的安装，不具体说了，用来自动补全。</p>
+<h2 id="6unity-编辑器配置">6.Unity 编辑器配置</h2>
+<p>打开 Unity，在菜单栏上选择<code>Edit &gt; Preferences &gt; External Tools</code>，然后将：</p>
+<blockquote>
+<p>External Script Editor选Sublime Text3.exe<br>
+External Script Editor Args填写为&quot;<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>F</mi><mi>i</mi><mi>l</mi><mi>e</mi><mo>)</mo><mi mathvariant="normal">&quot;</mi><mo>:</mo></mrow><annotation encoding="application/x-tex">(File)&quot;:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mclose">)</span><span class="mord">&quot;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span></span></span>(Line)</p>
+</blockquote>
+<h2 id="7为omnisharp配置项目路径">7.为Omnisharp配置项目路径</h2>
+<blockquote>
+<p><strong>注意：这一步是每次新建了Unity项目都要做的</strong></p>
+</blockquote>
+<p>这里我现在Unity中创建了一个叫做<code>test_with_sublime</code>的项目，然后：</p>
+<ul>
+<li>在Sublime中<code>File &gt; Open Folder</code>打开Unity建好的项目<code>test_with_sublime</code>。</li>
+<li>点<code>Project &gt; Save Project As</code>选到<code>test_with_sublime</code>目录下创建一个文件叫做<code>test_with_sublime.sublime-project</code>，这个文件的名字应该和你的Unity项目名以及项目文件夹下.sln文件的名称一致。</li>
+<li>在<code>test_with_sublime.sublime-project</code>文件中写入并保存：</li>
+</ul>
+<pre><code class="language-json">{
+    &quot;folders&quot;:
+    [
+        {   &quot;follow_symlinks&quot;:true,
+            &quot;path&quot;: &quot;./Assets&quot;,
+            &quot;file_exclude_patterns&quot;: 
+            [
+            &quot;*.meta&quot;,
+            &quot;*.dll&quot;
+            ]
+        }
+    ],
+    &quot;solution_file&quot;: &quot;./test_with_sublime.sln&quot;
+}
+</code></pre>
+<ul>
+<li>重启Sublime，<code>Project &gt; Open Project</code>选项目内的*.sublime-project文件，我这里就是<code>test_with_sublime.sublime-project</code>，配置完成。</li>
+</ul>
+<h2 id="8hello-world">8.“Hello World！”</h2>
+<p>典中典，来搞一下：<br>
+Unity项目已经建好了就是test_with_sublime，打开Unity，在Assets目录下新建一个文件夹Scripts用来存放C#脚本，  在Scripts下新建一个C# script，命名为Hello.cs，双击打开，Unity会自动切换到Sublime，而且有一段已经写好的框架，我们正好只用在Strat里写一句就好：</p>
+<pre><code class="language-csharp">using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class hello : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        Debug.Log(&quot;Hello World!&quot;);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
+</code></pre>
+<p>保存后切回Unity，在“Hierarchy”窗口右键选“Creat Empty”，会创建一个“GameObject”，<br>
+我们可以把之前写好的Hello.cs拖拽到它的组件栏，或在组件栏添加组件，输入Hello并选择：<br>
+<img src="https://fjakeys.github.io/post-images/1662260887410.png" alt="" loading="lazy"></p>
+<p>然后基本就搞定了，点击运行键，就可以看到：<br>
+<img src="https://fjakeys.github.io/post-images/1662260929725.png" alt="" loading="lazy"></p>
+
+        </div>
+
+        
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://fjakeys.github.io/post/markdown_with_sublime_text/">
+                <h3 class="post-title">
+                  使用Sublime Text编辑Markdown
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

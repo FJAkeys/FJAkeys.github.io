@@ -1,0 +1,165 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>keysyanspace</title>
+<meta name="description" content="May the flame guide thee." />
+<link rel="shortcut icon" href="https://fjakeys.github.io/favicon.ico?v=1662261410971">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://fjakeys.github.io/styles/main.css">
+
+
+
+
+    
+  <link rel="stylesheet" href="https://fjakeys.github.io/highlight/styles/monokai-sublime.min.css">
+  <script src="https://fjakeys.github.io/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://fjakeys.github.io">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://fjakeys.github.io/images/avatar.png?v=1662261410971" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">keysyanspace</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#1%E4%B8%8B%E8%BD%BD-highlightjs">1.下载 highlight.js</a></li>
+<li><a href="#2%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%A2%98%E6%96%87%E4%BB%B6">2.修改主题文件</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          MAIN
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          ARCHIVES
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          TAGS
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">contact me at k@keysyanspace.com</div>
+    <a class="rss" href="https://fjakeys.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">给Gridea-Walker添加Highlight.js代码高亮</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2022-08-30 / 2 min read
+        </div>
+        
+        <div class="post-content yue">
+          <p>Walker主题的默认代码高亮用的prism.js真是太shit了，然后不知道为什么这个主题的作者还写了一个喝了 <s>酒</s> 翔才写得出来的scripts.ejs然后插在每一个ejs后引用，真的有毛病。<br>
+下面就来改一下：</p>
+<h2 id="1下载-highlightjs">1.下载 highlight.js</h2>
+<p>在<a href="https://highlightjs.org/">官网</a>下载 highlight.js，虽然也可以从cdnjs、jsdelivr和unpkg远程引用js，但是自己选择定制的包可以把不用的语言忽略掉。直接在download页面的Custom package一栏选择需要高亮的语言，点击<code>Download</code>按钮，下载解压。</p>
+<blockquote>
+<p>注意：解压好的highlight文件夹需要放在站点源文件路径下的Gridea\static里，如图：<br>
+<img src="https://fjakeys.github.io/post-images/1662103000619.png" alt="" loading="lazy"></p>
+</blockquote>
+<h2 id="2修改主题文件">2.修改主题文件</h2>
+<p>我用的主题是Walker，需要修改的文件有两个:</p>
+<ul>
+<li>Gridea\themes\walker\templates\post.ejs<br>
+在head里加入：</li>
+</ul>
+<pre><code class="language-html">  &lt;link rel=&quot;stylesheet&quot; href=&quot;&lt;%= themeConfig.domain %&gt;/highlight/styles/monokai-sublime.min.css&quot;&gt;
+  &lt;script src=&quot;&lt;%= themeConfig.domain %&gt;/highlight/highlight.min.js&quot;&gt;&lt;/script&gt;
+  &lt;script&gt;hljs.highlightAll();&lt;/script&gt;
+</code></pre>
+<p>monokai-sublime是我选的高亮配色主题，你也可以在highlight文件夹里的styles里随便选自己喜欢的，代码添加的位置如图：<img src="https://fjakeys.github.io/post-images/1662109835835.png" alt="" loading="lazy"></p>
+<ul>
+<li>Gridea\themes\walker\templates\includes\scripts.ejs<br>
+这个文件里的所有内容全部删干净，不然会覆盖影响highlight的正常渲染显示</li>
+</ul>
+<p>就是这么简单了。</p>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://fjakeys.github.io/tag/QiQkg3kk5/">
+            <span class="flex-auto">markdown</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://fjakeys.github.io/tag/Swp8eUWr5G/">
+            <span class="flex-auto">blog</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://fjakeys.github.io/post/markdown_with_sublime_text/">
+                <h3 class="post-title">
+                  <i class="ri-arrow-left-line"></i>
+                  使用Sublime Text编辑Markdown
+                </h3>
+              </a>
+            </div>
+          
+
+          
+            <div class="next-post">
+              <a href="https://fjakeys.github.io/post/Havok_in_Unity_DOTS/">
+                <h3 class="post-title">
+                  在Unity中通过DOTS使用Havok Physics引擎
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>
